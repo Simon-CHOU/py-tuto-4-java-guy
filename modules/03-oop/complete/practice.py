@@ -44,6 +44,9 @@ class Vector2D:
     def __bool__(self):
         return self.x != 0 or self.y != 0
 
+    def __hash__(self):
+        return hash((self.x, self.y))
+
     def __setattr__(self, name, value):
         raise AttributeError("Vector2D is immutable")
 

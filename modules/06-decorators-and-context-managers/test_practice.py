@@ -86,6 +86,22 @@ class TestMemoize:
         assert add(1, 2) == 3
         assert add(2, 3) == 5
 
+    def test_with_kwargs(self):
+        call_count = 0
+
+        @memoize
+        def greet(greeting, name, punctuation="."):
+            nonlocal call_count
+            call_count += 1
+            return f"{greeting}, {name}{punctuation}"
+
+        assert greet("Hello", "Alice") == "Hello, Alice."
+        assert greet("Hello", "Alice") == "Hello, Alice."
+        assert call_count == 1
+        # Different kwargs should be a separate cache entry
+        assert greet("Hello", "Alice", punctuation="!") == "Hello, Alice!"
+        assert call_count == 2
+
 
 class TestTimedOpen:
     def test_writes_and_reads(self, tmp_path):

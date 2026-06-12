@@ -37,6 +37,18 @@ class TestVector2D:
         with pytest.raises(AttributeError):
             v.x = 5
 
+    def test_hashable(self):
+        v1 = Vector2D(1, 2)
+        v2 = Vector2D(1, 2)
+        v3 = Vector2D(3, 4)
+        s = {v1, v2, v3}
+        assert len(s) == 2  # v1 and v2 are equal, so one hash collision
+
+    def test_dict_key(self):
+        v = Vector2D(0, 0)
+        d = {v: "origin"}
+        assert d[Vector2D(0, 0)] == "origin"
+
 
 class TestBetterDict:
     def test_dot_access(self):

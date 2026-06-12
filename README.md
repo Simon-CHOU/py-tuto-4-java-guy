@@ -149,6 +149,7 @@ py-tuto-4-java-guy/
 - Python 3.12+
 - `uv` (Python package manager)
 - The tutorial code itself uses **zero third-party dependencies** — standard library only
+- **Windows users:** `ProcessPoolExecutor` (Module 08) requires `if __name__ == "__main__"` guards. All `run_test.py` scripts already include this guard. If writing your own scripts with multiprocessing, wrap your entry point.
 
 ## References
 
