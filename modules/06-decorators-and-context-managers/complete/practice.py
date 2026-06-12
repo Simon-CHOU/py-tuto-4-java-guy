@@ -14,6 +14,7 @@ def timer(func):
         elapsed = time.perf_counter() - start
         print(f"[timer] {func.__name__} took {elapsed:.4f}s")
         return result
+
     return wrapper
 
 
@@ -28,7 +29,9 @@ def retry(max_attempts=3, exceptions=(Exception,)):
                     if attempt == max_attempts:
                         raise
             return None
+
         return wrapper
+
     return decorator
 
 
@@ -75,7 +78,8 @@ def validate_types(func):
                 expected = func.__annotations__[name]
                 if not isinstance(value, expected):
                     raise TypeError(
-                        f"Argument '{name}' expected {expected.__name__}, got {type(value).__name__}"
+                        f"Argument '{name}' expected {expected.__name__}, "
+                        f"got {type(value).__name__}"
                     )
 
         return func(*args, **kwargs)

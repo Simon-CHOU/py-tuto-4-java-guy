@@ -1,4 +1,6 @@
+# ruff: noqa: E402 — sys.path must be set before imports; conftest.py fixes this in P1
 """Tests for Module 07: Type Hints."""
+
 import os
 import sys
 from pathlib import Path

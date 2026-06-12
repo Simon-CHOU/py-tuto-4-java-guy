@@ -3,6 +3,7 @@
 
 # TODO: import Generic, TypeVar, Sequence, get_origin, get_args from typing
 
+# ruff: noqa: F821 — names intentionally undefined; student must add imports
 T = TypeVar("T")
 
 
@@ -14,6 +15,7 @@ class Stack(Generic[T]):
 
     Java analogy: public class Stack<T> { private List<T> items; ... }
     """
+
     raise NotImplementedError("TODO: implement Stack")
 
 

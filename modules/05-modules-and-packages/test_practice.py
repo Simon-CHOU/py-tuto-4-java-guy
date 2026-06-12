@@ -1,20 +1,21 @@
+# ruff: noqa: E402 — sys.path must be set before imports; conftest.py fixes this in P1
 """Tests for Module 05: Modules and Packages."""
+
 import os
 import sys
-from pathlib import Path
 import tempfile
+from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 target = HERE / os.environ.get("PRACTICE_TARGET", "complete")
 sys.path.insert(0, str(target))
 
-import pytest
 from practice import (
+    create_init_reexport,
+    detect_circular_imports,
+    filter_imports,
     import_from_path,
     validate_package_structure,
-    detect_circular_imports,
-    create_init_reexport,
-    filter_imports,
 )
 
 
@@ -36,7 +37,7 @@ class TestImportFromPath:
             tmp_path = Path(f.name)
 
         try:
-            Person = import_from_path(str(tmp_path), "Person")
+            Person = import_from_path(str(tmp_path), "Person")  # noqa: N806
             p = Person("Alice")
             assert p.name == "Alice"
         finally:

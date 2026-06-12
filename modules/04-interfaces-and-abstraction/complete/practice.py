@@ -7,16 +7,13 @@ from pathlib import Path
 
 class DataStore(ABC):
     @abstractmethod
-    def get(self, key):
-        ...
+    def get(self, key): ...
 
     @abstractmethod
-    def set(self, key, value):
-        ...
+    def set(self, key, value): ...
 
     @abstractmethod
-    def delete(self, key):
-        ...
+    def delete(self, key): ...
 
 
 class DictStore(DataStore):

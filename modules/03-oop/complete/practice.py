@@ -5,6 +5,7 @@ import math
 
 class Vector2D:
     """Immutable 2D vector with dunder methods."""
+
     __slots__ = ("_x", "_y")
 
     def __init__(self, x, y):
@@ -49,6 +50,7 @@ class Vector2D:
 
 class BetterDict(dict):
     """A dict subclass that allows attribute-style access."""
+
     def __getattr__(self, name):
         try:
             return self[name]
@@ -67,6 +69,7 @@ class BetterDict(dict):
 
 class Temperature:
     """Temperature with property-based celsius/fahrenheit conversion."""
+
     def __init__(self, celsius=0):
         self._celsius = celsius
 
@@ -98,5 +101,22 @@ class ImmutableConfig:
         raise AttributeError(f"Cannot modify attribute '{name}' — object is immutable")
 
     def __repr__(self):
-        items = {k: v for k, v in self.__dict__.items()}
+        items = dict(self.__dict__.items())
         return f"ImmutableConfig({items})"
+
+
+from dataclasses import dataclass  # noqa: E402
+
+
+@dataclass(frozen=True)
+class ConfigRecord:
+    """Immutable configuration using @dataclass(frozen=True).
+
+    Python dataclasses are the closest equivalent to Java records.
+    @dataclass auto-generates __init__, __repr__, __eq__, and __hash__.
+    frozen=True makes instances immutable.
+    """
+
+    host: str = "localhost"
+    port: int = 8080
+    debug: bool = False

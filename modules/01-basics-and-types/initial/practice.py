@@ -66,3 +66,37 @@ def merge_defaults(defaults, overrides):
     This is the Python idiom for "copy with updates" — no need for a builder pattern.
     """
     raise NotImplementedError("TODO: implement merge_defaults")
+
+
+def parse_command(cmd_str: str) -> str:
+    """Parse a command string and return a result string.
+
+    match/case (Python 3.10+) is Python's equivalent of Java's switch expression,
+    but MUCH more powerful — it supports pattern matching on sequences, dicts,
+    classes, and more. Use cmd_str.split() to tokenize, then match on the list.
+
+    Commands to handle:
+        "add <x> <y>"        -> "<x> + <y> = <sum>"
+        "quit"                -> "Goodbye!"
+        "help"                -> "Available: add <x> <y>, quit, help"
+        anything else         -> "Unknown command: <cmd_str>"
+
+    Java analogy: Enhanced switch with pattern matching (Java 17+), but Python's
+    version is more expressive — it destructures into variables inline.
+    """
+    raise NotImplementedError("TODO: implement parse_command using match/case")
+
+
+def describe_shape(shape: dict) -> str:
+    """Describe a shape given as a dict.
+
+    match/case can pattern match on dict structures:
+        {"type": "circle", "radius": r}     -> f"A circle with radius {r}"
+        {"type": "rect", "w": w, "h": h}     -> f"A {w}x{h} rectangle"
+        {"type": "point"}                    -> "A point"
+        anything else                         -> "Unknown shape: ..."
+
+    The dict pattern matching extracts values by key — no need for manual
+    .get() calls and if/elif chains.
+    """
+    raise NotImplementedError("TODO: implement describe_shape using match/case")

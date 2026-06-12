@@ -55,6 +55,7 @@ class TimedOpen:
 
     Java analogy: try-with-resources (AutoCloseable interface).
     """
+
     raise NotImplementedError("TODO: implement TimedOpen context manager")
 
 

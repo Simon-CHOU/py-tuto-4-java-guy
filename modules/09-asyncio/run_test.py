@@ -1,4 +1,4 @@
-"""Run tests for module 01 against initial/ or complete/ implementation."""
+"""Run tests for module 09 against initial/ or complete/ implementation."""
 
 import os
 import subprocess

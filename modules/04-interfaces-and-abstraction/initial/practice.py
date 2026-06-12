@@ -5,6 +5,7 @@
 # TODO: import OrderedDict from collections
 # TODO: import Path from pathlib
 
+
 class DataStore:
     """Abstract base class defining the contract for a key-value store.
 
@@ -18,11 +19,13 @@ class DataStore:
     In Python, use ABC (Abstract Base Class) + @abstractmethod.
     Trying to instantiate DataStore() should raise TypeError.
     """
+
     raise NotImplementedError("TODO: implement DataStore as an ABC")
 
 
 class DictStore(DataStore):
     """Simple dict-backed implementation of DataStore. Extends DataStore."""
+
     raise NotImplementedError("TODO: implement DictStore")
 
 
@@ -32,6 +35,7 @@ class LRUStore(DataStore):
     Use collections.OrderedDict — it remembers insertion order
     and has move_to_end().
     """
+
     raise NotImplementedError("TODO: implement LRUStore")
 
 

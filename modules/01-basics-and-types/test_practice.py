@@ -1,4 +1,6 @@
+# ruff: noqa: E402 — sys.path must be set before imports; conftest.py fixes this in P1
 """Tests for Module 01: Basics and Types."""
+
 import os
 import sys
 from pathlib import Path
@@ -10,11 +12,13 @@ sys.path.insert(0, str(target))
 import pytest
 from practice import (
     classify_number,
-    safe_divide,
+    describe_shape,
+    flatten_nested,
     format_table,
     is_palindrome,
-    flatten_nested,
     merge_defaults,
+    parse_command,
+    safe_divide,
 )
 
 
@@ -138,3 +142,40 @@ class TestMergeDefaults:
         result = merge_defaults(defaults, {})
         assert result == {"a": 1, "b": 2}
         assert result is not defaults  # new dict, not same reference
+
+
+class TestParseCommand:
+    def test_add(self):
+        assert parse_command("add 3 4") == "3 + 4 = 7"
+
+    def test_add_negative(self):
+        assert parse_command("add -1 5") == "-1 + 5 = 4"
+
+    def test_quit(self):
+        assert parse_command("quit") == "Goodbye!"
+
+    def test_help(self):
+        result = parse_command("help")
+        assert "add" in result
+        assert "quit" in result
+        assert "help" in result
+
+    def test_unknown(self):
+        result = parse_command("fly to moon")
+        assert "Unknown command" in result
+
+
+class TestDescribeShape:
+    def test_circle(self):
+        assert describe_shape({"type": "circle", "radius": 5}) == "A circle with radius 5"
+
+    def test_rectangle(self):
+        result = describe_shape({"type": "rect", "w": 10, "h": 20})
+        assert result == "A 10x20 rectangle"
+
+    def test_point(self):
+        assert describe_shape({"type": "point"}) == "A point"
+
+    def test_unknown_shape(self):
+        result = describe_shape({"type": "blob"})
+        assert "Unknown shape" in result

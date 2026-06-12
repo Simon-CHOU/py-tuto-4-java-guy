@@ -1,20 +1,20 @@
+# ruff: noqa: E402 — sys.path must be set before imports; conftest.py fixes this in P1
 """Tests for Module 08: Concurrency and Parallelism."""
+
 import os
 import sys
 from pathlib import Path
-import time
 
 HERE = Path(__file__).resolve().parent
 target = HERE / os.environ.get("PRACTICE_TARGET", "complete")
 sys.path.insert(0, str(target))
 
-import pytest
 from practice import (
+    countdown,
+    gil_demonstration,
+    process_sum,
     sequential_sum,
     threaded_sum,
-    process_sum,
-    gil_demonstration,
-    countdown,
 )
 
 

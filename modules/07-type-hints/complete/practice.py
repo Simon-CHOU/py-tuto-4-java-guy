@@ -1,10 +1,12 @@
 """Module 07: Type Hints — Reference Implementation."""
 
-from typing import Generic, TypeVar, Sequence, get_origin, get_args
+from collections.abc import Sequence
+from typing import Generic, TypeVar, get_args, get_origin
 
 T = TypeVar("T")
 
 
+# ruff: noqa: UP046, UP047 — Generic[T] syntax mirrors Java <T> for pedagogy
 class Stack(Generic[T]):
     def __init__(self):
         self._items: list[T] = []

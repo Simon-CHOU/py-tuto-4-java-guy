@@ -96,6 +96,7 @@ for d in modules/*/; do (cd "$d" && python run_test.py complete); done
 | 06 | **Decorators and Context Managers** | "Are decorators like Java annotations?" (Spoiler: no) |
 | 07 | **Type Hints** | "Can Python types give me real type safety?" |
 | 08 | **Concurrency and Parallelism** | "What's the GIL, and how do I run CPU work in parallel?" |
+| 09 | **asyncio** | "How do you handle concurrent I/O without threads?" |
 
 Each module contains:
 - `tutorial.ipynb` — interactive notebook comparing Java and Python
@@ -123,6 +124,7 @@ py-tuto-4-java-guy/
 │   ├── 06-decorators-and-context-managers/
 │   ├── 07-type-hints/
 │   └── 08-concurrency-and-parallelism/
+│   └── 09-asyncio/
 └── docs/
     ├── python-3.14-docs-html/   # Offline Python docs
     └── superpowers/             # Design spec & implementation plan

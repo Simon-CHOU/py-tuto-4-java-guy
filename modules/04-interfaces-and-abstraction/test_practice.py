@@ -1,4 +1,6 @@
+# ruff: noqa: E402 — sys.path must be set before imports; conftest.py fixes this in P1
 """Tests for Module 04: Interfaces and Abstraction."""
+
 import os
 import sys
 from pathlib import Path
@@ -8,11 +10,12 @@ target = HERE / os.environ.get("PRACTICE_TARGET", "complete")
 sys.path.insert(0, str(target))
 
 import json
+
 import pytest
 from practice import (
+    DataStore,
     DictStore,
     LRUStore,
-    DataStore,
     save_to_file,
 )
 

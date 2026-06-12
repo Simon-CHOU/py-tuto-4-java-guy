@@ -1,4 +1,6 @@
+# ruff: noqa: E402 — sys.path must be set before imports; conftest.py fixes this in P1
 """Tests for Module 03: Object-Oriented Programming."""
+
 import os
 import sys
 from pathlib import Path
@@ -7,9 +9,8 @@ HERE = Path(__file__).resolve().parent
 target = HERE / os.environ.get("PRACTICE_TARGET", "complete")
 sys.path.insert(0, str(target))
 
-import math
 import pytest
-from practice import Vector2D, BetterDict, Temperature, ImmutableConfig
+from practice import BetterDict, ConfigRecord, ImmutableConfig, Temperature, Vector2D
 
 
 class TestVector2D:
@@ -97,3 +98,39 @@ class TestImmutableConfig:
         c = ImmutableConfig(host="localhost")
         with pytest.raises(AttributeError):
             c.new_attr = 42
+
+
+class TestConfigRecord:
+    def test_init_defaults(self):
+        c = ConfigRecord()
+        assert c.host == "localhost"
+        assert c.port == 8080
+        assert c.debug is False
+
+    def test_init_custom(self):
+        c = ConfigRecord(host="example.com", port=443, debug=True)
+        assert c.host == "example.com"
+        assert c.port == 443
+        assert c.debug is True
+
+    def test_immutable(self):
+        c = ConfigRecord()
+        with pytest.raises(AttributeError):
+            c.host = "other"
+
+    def test_equality(self):
+        c1 = ConfigRecord(host="a", port=1)
+        c2 = ConfigRecord(host="a", port=1)
+        assert c1 == c2
+        assert c1 != ConfigRecord(host="b", port=1)
+
+    def test_hashable(self):
+        c = ConfigRecord()
+        s = {c}
+        assert c in s
+
+    def test_repr(self):
+        c = ConfigRecord(host="x", port=1, debug=False)
+        r = repr(c)
+        assert "x" in r
+        assert "1" in r

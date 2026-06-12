@@ -1,4 +1,6 @@
+# ruff: noqa: E402 — sys.path must be set before imports; conftest.py fixes this in P1
 """Tests for Module 02: Functional Features."""
+
 import os
 import sys
 from pathlib import Path
@@ -7,14 +9,13 @@ HERE = Path(__file__).resolve().parent
 target = HERE / os.environ.get("PRACTICE_TARGET", "complete")
 sys.path.insert(0, str(target))
 
-import pytest
 from practice import (
-    select_and_transform,
-    word_frequencies,
     fibonacci,
     group_by,
-    running_average,
     interleave,
+    running_average,
+    select_and_transform,
+    word_frequencies,
 )
 
 
@@ -23,7 +24,7 @@ class TestSelectAndTransform:
         result = select_and_transform(
             [1, 2, 3, 4, 5, 6],
             predicate=lambda x: x > 3,
-            transform=lambda x: x ** 2,
+            transform=lambda x: x**2,
         )
         assert result == [16, 25, 36]
 
@@ -63,6 +64,7 @@ class TestFibonacci:
 
     def test_is_generator(self):
         import types
+
         assert isinstance(fibonacci(), types.GeneratorType)
 
 
@@ -94,6 +96,7 @@ class TestRunningAverage:
 
     def test_is_generator(self):
         import types
+
         assert isinstance(running_average([1]), types.GeneratorType)
 
 
@@ -112,4 +115,5 @@ class TestInterleave:
 
     def test_is_generator(self):
         import types
+
         assert isinstance(interleave([1], [2]), types.GeneratorType)

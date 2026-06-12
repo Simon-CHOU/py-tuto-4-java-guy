@@ -26,14 +26,12 @@ def format_table(rows):
         return ""
     keys = list(rows[0].keys())
     col_widths = {
-        key: max(len(str(key)), max(len(str(row.get(key, ""))) for row in rows))
-        for key in keys
+        key: max(len(str(key)), max(len(str(row.get(key, ""))) for row in rows)) for key in keys
     }
     header = " | ".join(str(key).ljust(col_widths[key]) for key in keys)
     separator = "-+-".join("-" * col_widths[key] for key in keys)
     body = "\n".join(
-        " | ".join(str(row.get(key, "")).ljust(col_widths[key]) for key in keys)
-        for row in rows
+        " | ".join(str(row.get(key, "")).ljust(col_widths[key]) for key in keys) for row in rows
     )
     return f"{header}\n{separator}\n{body}"
 
@@ -58,3 +56,33 @@ def flatten_nested(nested):
 def merge_defaults(defaults, overrides):
     """Return a new dict merging defaults with overrides, without mutating inputs."""
     return {**defaults, **overrides}
+
+
+def parse_command(cmd_str: str) -> str:
+    """Parse a command string using structural pattern matching (match/case).
+
+    Python 3.10+ match/case is more powerful than Java's switch — it destructures
+    sequences, mappings, and class instances.
+    """
+    match cmd_str.split():
+        case ["add", x, y]:
+            return f"{x} + {y} = {int(x) + int(y)}"
+        case ["quit"]:
+            return "Goodbye!"
+        case ["help"]:
+            return "Available: add <x> <y>, quit, help"
+        case _:
+            return f"Unknown command: {cmd_str}"
+
+
+def describe_shape(shape: dict) -> str:
+    """Describe a geometric shape using dict pattern matching."""
+    match shape:
+        case {"type": "circle", "radius": r}:
+            return f"A circle with radius {r}"
+        case {"type": "rect", "w": w, "h": h}:
+            return f"A {w}x{h} rectangle"
+        case {"type": "point"}:
+            return "A point"
+        case _:
+            return f"Unknown shape: {shape}"
