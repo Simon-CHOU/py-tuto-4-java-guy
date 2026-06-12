@@ -16,7 +16,9 @@ def word_frequencies(text):
     Use a dict comprehension: {key: value for item in iterable}
     Or use collections.Counter from the standard library.
     """
-    raise NotImplementedError("TODO: implement word_frequencies")
+    # BUG: this code has a problem. Find and fix it.
+    words = text.lower().split()
+    return {word: words.count(word) for word in words}
 
 
 def fibonacci():
@@ -56,3 +58,23 @@ def interleave(*iterables):
     Use iter() to create iterators, next() to get values, catch StopIteration.
     """
     raise NotImplementedError("TODO: implement interleave")
+
+
+def create_counter(start: int = 0):
+    """Return a closure that increments and returns a counter on each call.
+
+    Uses the 'nonlocal' keyword to mutate captured state across calls.
+    This bridges functional and OOP thinking — a closure captures state
+    (like fields) and exposes behavior (like methods), foreshadowing classes.
+
+    Java analogy: A lambda capturing a mutable local variable... except
+    Java requires captured variables to be effectively final. Python closures
+    can mutate captured variables via 'nonlocal'.
+
+    counter = create_counter()
+    counter()  # 1
+    counter()  # 2
+    counter2 = create_counter(10)
+    counter2()  # 11
+    """
+    raise NotImplementedError("TODO: implement create_counter")

@@ -1,14 +1,7 @@
-# ruff: noqa: E402 — sys.path must be set before imports; conftest.py fixes this in P1
 """Tests for Module 05: Modules and Packages."""
 
-import os
-import sys
 import tempfile
 from pathlib import Path
-
-HERE = Path(__file__).resolve().parent
-target = HERE / os.environ.get("PRACTICE_TARGET", "complete")
-sys.path.insert(0, str(target))
 
 from practice import (
     create_init_reexport,

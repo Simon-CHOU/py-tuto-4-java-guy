@@ -1,15 +1,7 @@
-# ruff: noqa: E402 — sys.path must be set before imports; conftest.py fixes this in P1
 """Tests for Module 02: Functional Features."""
 
-import os
-import sys
-from pathlib import Path
-
-HERE = Path(__file__).resolve().parent
-target = HERE / os.environ.get("PRACTICE_TARGET", "complete")
-sys.path.insert(0, str(target))
-
 from practice import (
+    create_counter,
     fibonacci,
     group_by,
     interleave,
@@ -117,3 +109,24 @@ class TestInterleave:
         import types
 
         assert isinstance(interleave([1], [2]), types.GeneratorType)
+
+
+class TestCreateCounter:
+    def test_starts_at_zero(self):
+        counter = create_counter()
+        assert counter() == 1
+        assert counter() == 2
+        assert counter() == 3
+
+    def test_custom_start(self):
+        counter = create_counter(10)
+        assert counter() == 11
+        assert counter() == 12
+
+    def test_independent_counters(self):
+        c1 = create_counter()
+        c2 = create_counter()
+        c1()
+        c1()
+        assert c1() == 3
+        assert c2() == 1  # independent state

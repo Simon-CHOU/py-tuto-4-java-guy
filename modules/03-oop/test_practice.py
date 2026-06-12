@@ -1,13 +1,4 @@
-# ruff: noqa: E402 — sys.path must be set before imports; conftest.py fixes this in P1
 """Tests for Module 03: Object-Oriented Programming."""
-
-import os
-import sys
-from pathlib import Path
-
-HERE = Path(__file__).resolve().parent
-target = HERE / os.environ.get("PRACTICE_TARGET", "complete")
-sys.path.insert(0, str(target))
 
 import pytest
 from practice import BetterDict, ConfigRecord, ImmutableConfig, Temperature, Vector2D

@@ -29,7 +29,21 @@ def retry(max_attempts=3, exceptions=(Exception,)):
     This is a decorator FACTORY — it returns a decorator, which returns a wrapper.
     Three levels of functions. Take a deep breath.
     """
-    raise NotImplementedError("TODO: implement retry decorator")
+    # BUG: this code has problems. Find and fix them.
+
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            for attempt in range(1, max_attempts + 1):
+                try:
+                    return func(*args, **kwargs)
+                except BaseException:
+                    if attempt == max_attempts:
+                        raise
+            return None
+
+        return wrapper
+
+    return decorator
 
 
 def memoize(func):
@@ -40,7 +54,15 @@ def memoize(func):
 
     Use a dict for the cache. functools.cache does this in stdlib as of Python 3.9.
     """
-    raise NotImplementedError("TODO: implement memoize decorator")
+    # BUG: this code has a problem. Find and fix it.
+    cache = {}
+
+    def wrapper(*args):
+        if args not in cache:
+            cache[args] = func(*args)
+        return cache[args]
+
+    return wrapper
 
 
 class TimedOpen:

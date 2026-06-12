@@ -65,7 +65,9 @@ def merge_defaults(defaults, overrides):
     Python's {**d1, **d2} syntax merges two dicts into a new one. Keys in d2 override d1.
     This is the Python idiom for "copy with updates" — no need for a builder pattern.
     """
-    raise NotImplementedError("TODO: implement merge_defaults")
+    # BUG: this code has a problem. Find and fix it.
+    defaults.update(overrides)
+    return defaults
 
 
 def parse_command(cmd_str: str) -> str:

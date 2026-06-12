@@ -11,7 +11,18 @@ class Vector2D:
     but in Python you hook into the language via dunder (double-underscore) methods.
     """
 
-    raise NotImplementedError("TODO: implement Vector2D")
+    # BUG: this code has problems. Find and fix them.
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __repr__(self):
+        return f"Vector2D({self.x}, {self.y})"
+
+    def __eq__(self, other):
+        if not isinstance(other, Vector2D):
+            return NotImplemented
+        return self.x == other.x and self.y == other.y
 
 
 class BetterDict(dict):

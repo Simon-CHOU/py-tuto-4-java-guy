@@ -49,3 +49,20 @@ def interleave(*iterables):
             iterators.remove(it)
         if not iterators:
             break
+
+
+def create_counter(start: int = 0):
+    """Return a closure that increments and returns a counter on each call.
+
+    This PREVIEWS state + behavior — the core of OOP — using only functions.
+    The closure captures `count` (state) and exposes `increment` (behavior).
+    'nonlocal' is Python's way of saying "this variable belongs to the enclosing scope."
+    """
+    count = start
+
+    def increment():
+        nonlocal count
+        count += 1
+        return count
+
+    return increment
