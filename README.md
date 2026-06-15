@@ -31,28 +31,39 @@ source .venv/bin/activate    # WSL2/Linux
 uv pip install -e ".[dev]"   # Install dev tools (pytest, jupyter)
 ```
 
-### 3. Learn by question ID
+### 3. Start learning
 
-Work from the repository root and pick one exercise by its unique ID:
+Use:
+
+```bash
+uv run learn <question-id>
+```
+
+to run the exercise identified by that unique question ID.
+
+For example:
 
 ```bash
 uv run learn M01-Q01
 ```
 
-This runs exactly one exercise against your `initial/` implementation.
+This runs question `M01-Q01` against your `initial/` implementation.
 
-### 4. Summarize progress
+### 4. Batch test your work
 
-Check your current progress across all exercises:
+Use:
 
 ```bash
 uv run summary
 ```
 
-This prints:
+to summarize the current pass/fail status of all exercises.
+
+This command gives you:
 
 - question-level status (`PASS` / `FAIL`)
 - module-level progress totals
+- a quick way to compare your current learning progress
 
 ### 5. Module workflow (compatibility path)
 
@@ -168,7 +179,7 @@ py-tuto-4-java-guy/
 
 ## Requirements
 
-- Python 3.12+
+- Python 3.14.x
 - `uv` (Python package manager)
 - The tutorial code itself uses **zero third-party dependencies** — standard library only
 - **Windows users:** `ProcessPoolExecutor` (Module 08) requires `if __name__ == "__main__"` guards. All `run_test.py` scripts already include this guard. If writing your own scripts with multiprocessing, wrap your entry point.
