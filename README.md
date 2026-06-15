@@ -31,9 +31,32 @@ source .venv/bin/activate    # WSL2/Linux
 uv pip install -e ".[dev]"   # Install dev tools (pytest, jupyter)
 ```
 
-### 3. Work through a module
+### 3. Learn by question ID
 
-Each module follows the same flow:
+Work from the repository root and pick one exercise by its unique ID:
+
+```bash
+uv run learn M01-Q01
+```
+
+This runs exactly one exercise against your `initial/` implementation.
+
+### 4. Summarize progress
+
+Check your current progress across all exercises:
+
+```bash
+uv run summary
+```
+
+This prints:
+
+- question-level status (`PASS` / `FAIL`)
+- module-level progress totals
+
+### 5. Module workflow (compatibility path)
+
+The original module-local workflow still works if you prefer to study one module at a time:
 
 ```bash
 cd modules/01-basics-and-types
@@ -53,11 +76,10 @@ jupyter notebook tutorial.ipynb
 # Or open in VS Code / any .ipynb viewer
 ```
 
-### 4. Run all tests
+### 6. Run all reference-answer tests
 
 ```bash
-# Run each module's tests against the reference answers
-for d in modules/*/; do (cd "$d" && python run_test.py complete); done
+uv run test-all
 ```
 
 ## Mental Model: Java → Python at a Glance
