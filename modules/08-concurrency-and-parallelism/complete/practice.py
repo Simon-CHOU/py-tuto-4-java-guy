@@ -37,9 +37,10 @@ def threaded_sum(iterable, num_threads=4):
 def process_sum(iterable, num_processes=4):
     """Sum using ProcessPoolExecutor for true CPU parallelism.
 
-    WARNING: On Windows, ProcessPoolExecutor requires the main module to be
-    importable without side effects. Always guard entry points with
-    `if __name__ == "__main__"` — run_test.py already does this.
+    WARNING: On Windows, ProcessPoolExecutor requires the entry-point script
+    to be importable without side effects. Always guard the calling script with
+    `if __name__ == "__main__"`.  This module is safe to import because it only
+    defines functions — no process-pool code runs at import time.
     """
     data = list(iterable)
     chunks = _make_chunks(data, num_processes)

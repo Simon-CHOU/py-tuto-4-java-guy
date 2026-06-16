@@ -92,9 +92,9 @@ class TestFilterImports:
         assert result == ["os", "math"]
 
     def test_disallowed_imports(self):
-        disallowed = filter_imports(
+        result = filter_imports(
             ["secret_module", "os"],
             allowed=["os"],
         )
-        assert "secret_module" not in disallowed
-        assert "os" in disallowed
+        assert "secret_module" not in result
+        assert "os" in result

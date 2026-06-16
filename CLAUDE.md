@@ -23,10 +23,10 @@ ref:
 
 ## Python 运行时环境坑点
 
-基于 `.trae/documents/python-runtime-management-plan.md` 和本次实际落地过程，当前仓库有几个需要长期记住的环境坑点：
+基于 `.trae/documents/learning-cli-feasibility-plan.md` 和本次实际落地过程，当前仓库有几个需要长期记住的环境坑点：
 
 1. Python 版本必须显式固定，不能依赖宿主机默认解释器。
-   - 项目 `pyproject.toml` 要求 `requires-python = ">=3.12"`。
+   - 项目 `pyproject.toml` 要求 `requires-python = ">=3.14,<3.15"`。
    - 如果本地虚拟环境实际还是 Python 3.10，`uv`、`pytest`、editable install 和 console script 会出现不一致行为。
 
 2. 不要假设已有 `.venv` 一定可用。
@@ -46,7 +46,7 @@ ref:
    - 如果怀疑环境被打断污染，优先新建干净虚拟环境，而不是在旧环境上反复修补。
 
 6. `uv pip install -e ".[dev]"` 依赖当前解释器版本，不能混用系统 Python。
-   - 如果命令实际落到 Python 3.10，但项目要求 3.12+，解析依赖会直接失败。
+   - 如果命令实际落到 Python 3.10，但项目要求 3.14+，解析依赖会直接失败。
    - 需要明确指定目标环境，避免系统 Python 与项目虚拟环境串用。
 
 7. console script 能否运行，不只取决于 `[project.scripts]`。
@@ -57,7 +57,7 @@ ref:
 
 8. Windows 下链接和换行要特别小心。
    - Git 会提示 `CRLF` / `LF` 转换，这通常不是功能错误，但要避免在脚本文件里反复制造无意义 diff。
-   - 创建 `AGENTS.md` 之类的软链接时，优先使用 PowerShell 的显式命令，并确认链接目标正确。
+   - 创建软链接时，优先使用 PowerShell 的显式命令，并确认链接目标正确。
 
 ## 建议的环境纪律
 

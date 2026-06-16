@@ -1,4 +1,4 @@
-.PHONY: test lint format test-all
+.PHONY: test lint format ci
 
 test:
 	@for d in modules/*/; do \
@@ -12,4 +12,4 @@ lint:
 format:
 	ruff format modules/
 
-test-all: test lint
+ci: test lint
