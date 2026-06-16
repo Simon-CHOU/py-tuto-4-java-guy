@@ -137,6 +137,7 @@ Each module contains:
 - `complete/practice.py` — reference implementation
 - `test_practice.py` — shared test suite (pytest)
 - `run_test.py` — cross-platform test runner
+- `conftest.py` — pytest path setup (transparent, no user action needed)
 
 ## Project Structure
 
@@ -156,7 +157,7 @@ py-tuto-4-java-guy/
 │   ├── 05-modules-and-packages/
 │   ├── 06-decorators-and-context-managers/
 │   ├── 07-type-hints/
-│   └── 08-concurrency-and-parallelism/
+│   ├── 08-concurrency-and-parallelism/
 │   └── 09-asyncio/
 └── docs/
     ├── python-3.14-docs-html/   # Offline Python docs

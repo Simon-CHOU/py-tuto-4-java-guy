@@ -38,7 +38,7 @@ ref:
    - 需要优先使用非交互参数，例如显式清理后重建，避免等待终端确认。
 
 4. `uv venv` 新建环境后，不要假设 `pip` 已可直接使用。
-   - 某些场景下需要先执行 `python -m ensurepip --upgrade`。
+   - 优先使用 `uv pip install` 而非 `python -m ensurepip`（uv 是项目标准工具链）。
    - 否则后续 `python -m pip install ...` 会直接失败。
 
 5. 重型依赖安装如果中途中断，容易留下半安装环境。
