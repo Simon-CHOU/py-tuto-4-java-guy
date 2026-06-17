@@ -5,7 +5,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from scripts.exercise_registry import list_exercises
-from scripts.learn import VALID_TARGETS, run_exercise
+from scripts.learn import STATUS_PASSED, VALID_TARGETS, evaluate_exercise
 
 
 def parse_args() -> argparse.Namespace:
@@ -57,12 +57,12 @@ def main() -> int:
     failures = 0
 
     for exercise in list_exercises():
-        result = run_exercise(exercise, args.target, capture_output=True)
+        result = evaluate_exercise(exercise, args.target)
         module_name = Path(exercise.module_dir).name
-        status = "PASS" if result.returncode == 0 else "FAIL"
+        status = result.summary_status
         question_rows.append((exercise.question_id, module_name, exercise.symbol_name, status))
         module_totals[module_name]["total"] += 1
-        if status == "PASS":
+        if result.status == STATUS_PASSED:
             module_totals[module_name]["passed"] += 1
         else:
             failures += 1
@@ -77,7 +77,12 @@ def main() -> int:
         total_questions += total
         module_rows.append((module_name, str(passed), str(total), _format_progress(passed, total)))
     module_rows.append(
-        ("TOTAL", str(total_passed), str(total_questions), _format_progress(total_passed, total_questions))
+        (
+            "TOTAL",
+            str(total_passed),
+            str(total_questions),
+            _format_progress(total_passed, total_questions),
+        )
     )
 
     _print_question_table(question_rows)
